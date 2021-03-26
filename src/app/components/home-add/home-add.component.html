@@ -1,0 +1,131 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate (ngSubmit)="save()" [formGroup]="houseForm">
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="houseNumber">House Number</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="houseNumber" type="number" placeholder="House number(required)"
+                        formControlName="houseNumber" [ngClass]="{'is-invalid':(houseForm.get('houseNumber').touched || houseForm.get('houseNumber').dirty)&& 
+                                !houseForm.get('houseNumber').valid }" />
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="houseForm.get('houseNumber').errors?.required">
+                            Please enter your house number.
+                        </span>
+                        <span *ngIf="houseForm.get('houseNumber').errors?.pattern">
+                            Please enter numbers.
+                        </span>
+
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="houseAddress">House Address</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="houseAddress" type="text" placeholder="House name(required)"
+                        formControlName="houseAddress" [ngClass]="{'is-invalid':(houseForm.get('houseAddress').touched || houseForm.get('houseAddress').dirty)&& 
+                                !houseForm.get('houseAddress').valid }" />
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="houseForm.get('houseAddress').errors?.required">
+                            Please enter your house address.
+                        </span>
+                        <span *ngIf="houseForm.get('houseAddress').errors?.minlength">
+                            The address must be longer than 5 characters.
+                        </span>
+                        <span *ngIf="houseForm.get('houseAddress').errors?.maxlength">
+                            The address must be shorter than 40 characters.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div formArrayName="members" *ngFor="let member of membersFormArray.controls; let i = index;">
+                <div [formGroupName]="i">
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" attr.for="{{ 'name' + i }}">Name{{i+1}}</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="{{ 'name' + i }}" type="text" placeholder="Name(required)"
+                                formControlName="name" [ngClass]="{'is-invalid':(member.controls.name.touched || member.controls.name.dirty)&& 
+                                    !member.controls.name.valid }" />
+
+                            <span class="invalid-feedback">
+                                <span *ngIf="member.controls.name.errors?.required">
+                                    Please enter the name.
+                                </span>
+                                <span *ngIf="member.controls.name.errors?.minlength">
+                                    The name must be longer than 3 characters.
+                                </span>
+                                <span *ngIf="member.controls.name.errors?.maxlength">
+                                    The name must be shorter than 32 characters.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label pt-0">Gender</label>
+                        <div class="col-md-8">
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" value="male"
+                                        formControlName="gender">Male
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" value="female"
+                                        formControlName="gender">Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <label class="col-md-2 col-form-label" attr.for="{{ 'age' + i }}">Age</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="{{ 'age' + i }}" type="number" placeholder="Age(required)"
+                                formControlName="age" [ngClass]="{'is-invalid':(member.controls.age.touched || member.controls.age.dirty)&& 
+                                    !member.controls.age.valid }" />
+
+                            <span class="invalid-feedback">
+                                <span *ngIf="member.controls.age.errors?.required">
+                                    Please enter your Age.
+                                </span>
+                                <span *ngIf="member.controls.age.errors?.pattern">
+                                    Please enter numbers.
+                                </span>
+
+                            </span>
+                        </div>
+                        <div *ngIf="(membersFormArray.length!=1)">
+                            <button class="col-md-12 btn btn-outline-warning btn-md" type="button"
+                                title="Delete this member" (click)="deleteMember(i)">Delete Member
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <div class="col-md-4">
+                    <button class="btn btn-outline-primary" type="button" [disabled]="!membersFormArray.valid"
+                        (click)="addMember()">
+                        Add Another Member
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-primary mr-3" type="submit" style="width:80px" [disabled]="!houseForm.valid">
+                Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits"
+                [routerLink]="['/home']">
+                Cancel
+            </button>
+            <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this house"
+                (click)="deleteHome()">
+                Delete
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "covid-19-survey-assignment": {
+      "hosting": {
+        "home-using-firebase": [
+          "covid-19-survey-assignment"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header text-center" *ngIf="home1">
+        House Number - {{home1.houseNumber}}, House Addess - {{ home1.houseAddress}}
+    </div>
+
+    <div class="card-body text-center" *ngIf="home1">
+
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of home1.members">
+                        <td >
+                            {{ p.name }}
+                        </td>
+                        <td>
+
+                            {{ p.gender }}
+
+                        </td>
+                        <td>{{ p.age }}</td>
+                    </tr>
+            
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-outline-secondary mr-3" style="width:80px" (click)="onBack()">
+                    <i class="fa fa-chevron-left"></i> Back
+                </button>
+                <button class="btn btn-outline-primary" style="width:80px" [routerLink]="['/home', home1.id, 'add']">
+                    Edit
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
+    </div>
+</div>
+
