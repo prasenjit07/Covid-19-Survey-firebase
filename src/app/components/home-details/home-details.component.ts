@@ -11,23 +11,20 @@ import {HomeService} from '../../services/home.service'
 export class HomeDetailsComponent implements OnInit {
 
   errorMessage = '';
-  home1:Home;
-  //flag:any;
+  home:Home;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private homeService: HomeService) { }
 
   ngOnInit(): void {
     const param = this.route.snapshot.paramMap.get('id');
-    //this.flag=param;
     this.getHome(param);
   }
 
   getHome(id: any): void{
-    this.homeService.hom(id).subscribe({
-      next: home1 => {
-        this.home1 = home1
-        //console.log('me'+this.home1)
+    this.homeService.singleHome(id).subscribe({
+      next: home => {
+        this.home = home;
       },
       error: err => this.errorMessage = err
     });

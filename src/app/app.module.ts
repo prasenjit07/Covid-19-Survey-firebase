@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http'
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { HomeData } from './components/home-data';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
@@ -19,7 +18,6 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    InMemoryWebApiModule.forRoot(HomeData),
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule, 

@@ -4,7 +4,7 @@
             [routerLink]="['/home/0/add']">Add House
         </button>
         <div class="table-responsive">
-            <table class="table mb-0" *ngIf="homes1 && homes1.length">
+            <table class="table mb-0" *ngIf="homes && homes.length">
                 <thead>
                     <tr>
                         <th>House Number</th>
@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let home of homes1">
+                    <tr *ngFor="let home of homes">
                         <td>
                             <a [routerLink]="['/home', home.id]">
                                 {{ home.houseNumber }}

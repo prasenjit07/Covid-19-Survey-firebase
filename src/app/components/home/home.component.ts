@@ -10,21 +10,16 @@ import {HomeService} from '../../services/home.service'
 })
 export class HomeComponent implements OnInit {
 
-  
   errorMessage:string='';
-  homes1:Home[];
+  homes:Home[];
   constructor(private homeService: HomeService,private route:ActivatedRoute) {}
   
   ngOnInit(): void {
-    this.homeService.Home().subscribe({
-        next: homes1 => {
-          this.homes1 = homes1;
-          console.log(homes1)
+    this.homeService.multipleHome().subscribe({
+        next: homes => {
+          this.homes = homes;
         },
         error: err => this.errorMessage = err
-    })
-    
+    }) 
   }
-  
-
 }

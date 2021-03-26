@@ -7,10 +7,7 @@ import { HomeThreatComponent } from './home-threat/home-threat.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { RouterModule } from '@angular/router';
-//import { HomesResolverService } from '../resolvers/homes-resolver.service';
-//import { HomeResolverService } from '../resolvers/home-resolver.service';
 import { HomeAddGuard } from '../guard/home-add.guard';
-import { HomeData } from './home-data';
  
 @NgModule({
   declarations: [
@@ -22,28 +19,23 @@ import { HomeData } from './home-data';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(HomeData),
     RouterModule.forChild([
       {
         path: '',
         component: HomeComponent,
-        //resolve: { resolvedData: HomesResolverService }
       },
       {
         path: 'threat',
         component: HomeThreatComponent,
-        //resolve: { resolvedData: HomesResolverService }
       },
       {
         path: ':id',
         component: HomeDetailsComponent,
-        //resolve: { resolvedData: HomeResolverService }
       },
       {
         path: ':id/add',
         component: HomeAddComponent,
         canDeactivate: [HomeAddGuard],
-        //resolve: { resolvedData: HomeResolverService }
       },
     ])
   ]
