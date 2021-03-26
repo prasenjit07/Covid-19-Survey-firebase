@@ -91,6 +91,7 @@ export class HomeAddComponent implements OnInit {
   }
 
   createFormArrayWithMembers(members: any[]) {
+    if(members)
     members.forEach(member => {
       this.membersFormArray.push(
         this.fb.group({
@@ -109,8 +110,14 @@ export class HomeAddComponent implements OnInit {
       this.onSaveComplete();
     } else {
       if (confirm(`Really delete the home: ${this.home.houseAddress}?`)) {
-        this.homeService.deleteHome(this.home);
-        this.onSaveComplete();
+        this.homeService.deleteHome(this.home).
+        then(() => {
+          console.log("Document successfully deleted!");
+          this.onSaveComplete();
+        }).catch((error) => {
+          console.error("Error removing document: ", error);
+        });
+        
       }
     }
   }

@@ -27,11 +27,7 @@ export class HomeService {
 
 
   deleteHome(home: Home) {
-    this.store.collection("home").doc(home.id).delete().then(() => {
-      console.log("Document successfully deleted!");
-    }).catch((error) => {
-      console.error("Error removing document: ", error);
-    });
+    return this.store.collection('home').doc(home.id).delete();
   }
 
   updateHome(home: any) {
